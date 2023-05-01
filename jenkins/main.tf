@@ -1,0 +1,60 @@
+resource "aws_instance" "bastion" {
+  ami = "ami-007855ac798b5175e"
+
+  instance_type = "t2.micro"
+  key_name = "ec2"
+  vpc_security_group_ids = [aws_security_group.MYSG.id]
+  subnet_id = "${element(module.vpc.public_subnets, 0)}"
+
+  tags = {
+    Name = "bastion-terraform"
+    Department = "DevSecOps Associate" 
+    Creation = "terraform"
+  }
+}
+
+#Associate EIP with EC2 Instance
+resource "aws_eip_association" "demo-eip-association" {
+  instance_id   = aws_instance.bastion.id
+  allocation_id = "eipalloc-00a0c7dea8b9bacfc"
+}
+
+resource "aws_instance" "jenkins" {
+  ami = "ami-007855ac798b5175e"
+
+  instance_type = "t2.medium"
+  key_name = "bastion"
+  vpc_security_group_ids = [aws_security_group.JSG.id]
+  subnet_id = "${element(module.vpc.private_subnets, 0)}"
+
+  tags = {
+    Name = "jenkins-terraform"
+    Department = "DevSecOps Associate" 
+    Creation = "terraform"
+  }
+}
+
+resource "aws_instance" "builder" {
+  ami = "ami-007855ac798b5175e"
+
+  instance_type = "t2.medium"
+  key_name = "Bastion"
+  vpc_security_group_ids = [aws_security_group.JSG.id]
+  subnet_id = "${element(module.vpc.private_subnets, 0)}"
+
+  tags = {
+    Name = "builder-terraform"
+    Department = "DevSecOps Associate" 
+    Creation = "terraform"
+  }
+}
+
+
+
+
+
+
+
+ 
+
+
