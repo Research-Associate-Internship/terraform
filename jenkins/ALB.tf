@@ -13,7 +13,8 @@ resource "aws_lb" "ALB" {
     ]
 
     tags                                        = {
-        "Department" = "DevSecOps Associate"
+        Department = "DevSecOps Associate"
+        Creation = "terraform"
     }
 
 }

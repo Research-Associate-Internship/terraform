@@ -1,5 +1,5 @@
 resource "aws_security_group" "MYSG" {
-  name = "B-SG"
+  name = "Bastion-SG"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
@@ -12,15 +12,6 @@ resource "aws_security_group" "MYSG" {
     ]
   }
 
-  # ingress {
-  #   from_port = 0
-  #   to_port   = 65535
-  #   protocol  = "tcp"
-
-  #   cidr_blocks = [
-  #    "0.0.0.0/0",
-  #   ]
-  # }
 
    egress {
     from_port        = 0
@@ -38,7 +29,7 @@ resource "aws_security_group" "MYSG" {
 }
 
 resource "aws_security_group" "JSG" {
-  name = "J-SG"
+  name = "Jenkins-SG"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
@@ -73,7 +64,7 @@ resource "aws_security_group" "JSG" {
 }
 
   resource "aws_security_group" "ALB-SG" {
-  name = "LB-SG"
+  name = "ALB-SG"
   vpc_id      = module.vpc.vpc_id
 
   ingress {

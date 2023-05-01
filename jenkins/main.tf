@@ -7,7 +7,7 @@ resource "aws_instance" "bastion" {
   subnet_id = "${element(module.vpc.public_subnets, 0)}"
 
   tags = {
-    Name = "bastion-terraform"
+    Name = "bastion-host"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
   }
@@ -28,7 +28,7 @@ resource "aws_instance" "jenkins" {
   subnet_id = "${element(module.vpc.private_subnets, 0)}"
 
   tags = {
-    Name = "jenkins-terraform"
+    Name = "jenkins-master"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
   }
@@ -43,7 +43,7 @@ resource "aws_instance" "builder" {
   subnet_id = "${element(module.vpc.private_subnets, 0)}"
 
   tags = {
-    Name = "builder-terraform"
+    Name = "jenkins-builder"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
   }
