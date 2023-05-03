@@ -86,6 +86,7 @@ resource "aws_security_group" "JSG" {
     Name = "ALBSG-DevSecOps"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
+    project = "interns"
   }
 
 }

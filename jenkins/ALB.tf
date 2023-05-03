@@ -15,6 +15,7 @@ resource "aws_lb" "ALB" {
     tags                                        = {
         Department = "DevSecOps Associate"
         Creation = "terraform"
+        Project = "intern"
     }
 
 }

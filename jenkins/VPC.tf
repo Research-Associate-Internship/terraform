@@ -17,6 +17,7 @@ module "vpc" {
   tags = {
     Department = "DevSecOps Associate" 
     Creation = "terraform"
+    project = "interns"
   }
 }
 

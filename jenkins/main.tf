@@ -10,6 +10,7 @@ resource "aws_instance" "bastion" {
     Name = "bastion-host"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
+    project = "interns"
   }
 }
 
@@ -31,6 +32,7 @@ resource "aws_instance" "jenkins" {
     Name = "jenkins-master"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
+    project = "interns"
   }
 }
 
@@ -46,6 +48,7 @@ resource "aws_instance" "builder" {
     Name = "jenkins-builder"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
+    project = "interns"
   }
 }
 
@@ -61,6 +64,7 @@ resource "aws_instance" "builder2" {
     Name = "jenkins-builder2"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
+    project = "interns"
   }
 }
 
