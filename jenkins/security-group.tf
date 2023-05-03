@@ -49,8 +49,8 @@ resource "aws_security_group" "JSG" {
   }
 
   ingress {
-    from_port = 80
-    to_port   = 80
+    from_port = 8200
+    to_port   = 8200
     protocol  = "tcp"
 
     security_groups = [aws_security_group.ALB-SG.id]

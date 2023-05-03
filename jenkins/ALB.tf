@@ -29,7 +29,7 @@ resource "aws_lb_target_group" "test" {
 
 resource "aws_lb_target_group" "vault" {
   name     = "vault-TG"
-  port     = 80
+  port     = 8200
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
 }
