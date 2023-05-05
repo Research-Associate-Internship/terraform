@@ -73,7 +73,7 @@ resource "aws_instance" "vault" {
 
   instance_type = "t2.medium"
   key_name = "bastion"
-  vpc_security_group_ids = [aws_security_group.JSG.id]
+  vpc_security_group_ids = [aws_security_group.vault-SG.id]
   subnet_id = "${element(module.vpc.private_subnets, 0)}"
 
   tags = {
