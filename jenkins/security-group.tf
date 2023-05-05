@@ -1,3 +1,4 @@
+#####Bastion Security Group#####
 resource "aws_security_group" "MYSG" {
   name = "Bastion-SG"
   vpc_id      = module.vpc.vpc_id
@@ -27,7 +28,7 @@ resource "aws_security_group" "MYSG" {
   }
 
 }
-
+#####Jenkins master and builder Security Group#####
 resource "aws_security_group" "JSG" {
   name = "Jenkins-SG"
   vpc_id      = module.vpc.vpc_id
@@ -48,14 +49,6 @@ resource "aws_security_group" "JSG" {
     security_groups = [aws_security_group.ALB-SG.id]
   }
 
-  ingress {
-    from_port = 8200
-    to_port   = 8200
-    protocol  = "tcp"
-
-    security_groups = [aws_security_group.ALB-SG.id]
-  }
-
    egress {
     from_port        = 0
     to_port          = 0
@@ -70,7 +63,7 @@ resource "aws_security_group" "JSG" {
   }
 
 }
-
+#####Application load balancer Security Group#####
   resource "aws_security_group" "ALB-SG" {
   name = "ALB-SG"
   vpc_id      = module.vpc.vpc_id
@@ -78,14 +71,6 @@ resource "aws_security_group" "JSG" {
   ingress {
     from_port = 80
     to_port   = 80
-    protocol  = "tcp"
-
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port = 81
-    to_port   = 81
     protocol  = "tcp"
 
     cidr_blocks = ["0.0.0.0/0"]
@@ -107,11 +92,18 @@ resource "aws_security_group" "JSG" {
 
 }
 
-
-
+#####Vault Security Group#####
 resource "aws_security_group" "vault-SG" {
   name = "Vault-SG"
   vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+
+    cidr_blocks = [format("%s/32", aws_instance.bastion.private_ip)]
+  }
 
   ingress {
       from_port = 8200
