@@ -4,11 +4,11 @@ def TF = "eks"
 pipeline {
     // define which exact agent you want to run these instructions
     agent {
-        label 'workernode1'
+      label 'workernode1'
     }
-    parameters {
+    parameters {
       choice(name: 'Action', choices: 'apply', description: 'Manual build stages')
-  }
+    }
     tools {
         terraform 'tf_test' //set up this name in jenkins
         }
