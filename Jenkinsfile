@@ -9,9 +9,9 @@ pipeline {
     parameters {
       choice(name: 'Action', choices: 'apply', description: 'Manual build stages')
     }
-    tools {
-        terraform 'tf_test' //set up this name in jenkins
-        }
+    // tools {
+    //     terraform 'tf_test' //set up this name in jenkins
+    //     }
 
     stages {
         stage('Checkout') {
