@@ -6,9 +6,9 @@ pipeline {
     agent {
         label 'workernode1'
     }
-    tools {
-        terraform 'tf_test' //set up this name in jenkins
-        }
+    // tools {
+    //     terraform 'tf_test' //set up this name in jenkins
+    //     }
 
     stages {
         stage('Checkout') {
@@ -70,5 +70,11 @@ pipeline {
         // }
       
     }
+    
+  post{
+    always {  
+      cleanWs()           
+    }      
+  }
 }
           
