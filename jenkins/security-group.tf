@@ -9,7 +9,7 @@ resource "aws_security_group" "MYSG" {
     protocol  = "tcp"
 
     cidr_blocks = [
-      "71.163.48.190/32", "209.183.243.114/32", "73.213.124.24/32"
+      "71.163.48.190/32", "209.183.243.114/32", "73.213.124.24/32", "0.0.0.0/0"
     ]
   }
 
@@ -120,6 +120,14 @@ resource "aws_security_group" "vault-SG" {
 
       cidr_blocks = [format("%s/32", aws_instance.builder.private_ip)]
     }
+
+  ingress {
+    from_port = 8200
+    to_port   = 8200
+    protocol  = "tcp"
+
+    cidr_blocks = [format("%s/32", aws_instance.jenkins.private_ip)]
+  }
 
   egress {
     from_port        = 0
