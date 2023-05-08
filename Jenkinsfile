@@ -6,6 +6,8 @@ pipeline {
     agent {
         label 'workernode1'
     }
+      parameters {
+        choice(name: 'Action', choices: 'apply', description: 'Manual build stages')
     tools {
         terraform 'tf_test' //set up this name in jenkins
         }
