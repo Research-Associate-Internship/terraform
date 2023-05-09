@@ -22,9 +22,11 @@ pipeline {
         
         stage('terraform initialize') {
             steps {
+              withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                 dir("${WORKSPACE}/${TF}") {
                 sh 'terraform init' // initializes your terraform env
                 }
+              }
             }
         }
         
