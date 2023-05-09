@@ -5,6 +5,9 @@ resource "aws_eks_cluster" "devsecops {
   vpc_config {
     subnet_ids = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
   }
+   depends_on = [
+    "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
+  ]
 }
 
 resource "aws_iam_role" "devsecops-cluster" {
@@ -26,7 +29,7 @@ resource "aws_iam_role" "devsecops-cluster" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "betty-cluster-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role = aws_iam_role.devsecops-cluster.name
 }
