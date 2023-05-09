@@ -28,6 +28,12 @@ resource "aws_eks_node_group" "nextgen-node-group" {
   ami_type       = "AL2_x86_64"
   instance_types = ["t3.medium"]
 
+  tags = {
+    Department = "DevSecOps Associate"
+    project = "interns"
+    Creation = "terraform"
+  }
+
 }
 
 resource "aws_iam_role" "nextgen-role" {

@@ -8,6 +8,12 @@ resource "aws_eks_cluster" "devsecops" {
    depends_on = [
     "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
   ]
+
+  tags = {
+    Department = "DevSecOps Associate"
+    project = "interns"
+    Creation = "terraform"
+  }
 }
 
 resource "aws_iam_role" "devsecops-cluster" {
