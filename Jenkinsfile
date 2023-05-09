@@ -23,8 +23,6 @@ pipeline {
         stage('terraform initialize') {
             steps {
                 dir("${WORKSPACE}/${TF}") {
-                sh 'ls'
-                sh 'pwd'
                 sh 'terraform init' // initializes your terraform env
                 }
             }
