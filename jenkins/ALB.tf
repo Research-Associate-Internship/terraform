@@ -85,3 +85,24 @@ resource "aws_lb_target_group_attachment" "jenkins-attach" {
   target_id        = aws_instance.jenkins.id
   port             = 8080
 }
+
+resource "aws_lb_listener" "jenkins-tg" {
+  load_balancer_arn = aws_lb.ALB.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.jenkins.arn
+  }
+}
+resource "aws_lb_listener" "vault-tg" {
+  load_balancer_arn = aws_lb.vault.arn
+  port              = "80"
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.vault.arn
+  }
+}
+
