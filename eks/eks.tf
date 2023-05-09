@@ -1,4 +1,4 @@
-resource "aws_eks_cluster" "devsecops {
+resource "aws_eks_cluster" "devsecops" {
   name     = "devsecops-cluster"
   role_arn = aws_iam_role.devsecops-cluster.arn
 
