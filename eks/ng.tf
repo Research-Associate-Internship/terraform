@@ -2,12 +2,12 @@ resource "aws_eks_node_group" "nextgen-node-group" {
   cluster_name    = aws_eks_cluster.devsecops.name
   node_group_name = "nextgen-worker-group"
   node_role_arn   = aws_iam_role.nextgen-role.arn
-  subnet_ids      = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
+  subnet_ids      = [module.vpc.private_subnets[0]]//, module.vpc.private_subnets[1]]
 
   scaling_config {
-    desired_size = 2
-    max_size     = 2
-    min_size     = 2
+    desired_size = 1
+    max_size     = 1
+    min_size     = 1
   }
 
   update_config {
