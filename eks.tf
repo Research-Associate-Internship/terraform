@@ -24,16 +24,16 @@ module "eks" {
 
 }
 
-module "fargate_profile" {
-  source = "terraform-aws-modules/eks/aws//modules/fargate-profile"
+# module "fargate_profile" {
+#   source = "terraform-aws-modules/eks/aws//modules/fargate-profile"
 
-  name         = "FG-test"
-  cluster_name = "my-cluster"
+#   name         = "FG-test"
+#   cluster_name = "my-cluster"
 
-  subnet_ids = module.vpc.private_subnets
-  selectors = [{
-    namespace = "kube-system"
-  }]
+#   subnet_ids = module.vpc.private_subnets
+#   selectors = [{
+#     namespace = "kube-system"
+#   }]
 
   tags = {
     Department = "DevSecOps Associate"

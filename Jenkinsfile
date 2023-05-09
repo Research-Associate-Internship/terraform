@@ -52,23 +52,6 @@ pipeline {
             }
           }
         }
-      
-        // stage("destroy") {
-        //   //Condition to only run this stage if you approve to run it
-        //   input {
-        //     message "Ready to destroy?"
-        //     ok "Yes"
-        //   }
-          
-        //   steps {
-        //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        //             dir("${WORKSPACE}/Terraform/${TF}") {
-        //             sh 'terraform destroy --auto-approve' //destroys all resources created for you 
-        //             }
-        //     }
-        //   }
-        // }
-      
     }
 
   post{
