@@ -6,9 +6,9 @@ pipeline {
     agent {
       label 'workernode1'
     }
-    parameters {
-      choice(name: 'Action', choices: 'apply', description: 'Manual build stages')
-    }
+    // parameters {
+    //   choice(name: 'Action', choices: 'apply', description: 'Manual build stages')
+    // }
 
     stages {
         stage('Checkout') {
@@ -41,13 +41,29 @@ pipeline {
           }
         }
         
+        // stage("apply") {
+        //   when { expression { params.Action == 'apply' } }
+        //   steps {
+        //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        //             dir("${WORKSPACE}/${TF}") {
+        //             echo 'hello'
+        //             //sh 'terraform apply --auto-approve' //actually creates the resoruces and auto approved to bypass manual approval for automation
+        //             }
+        //     }
+        //   }
+        // }
+
         stage("apply") {
-          when { expression { params.Action == 'apply' } }
+          //Condition to only run this stage if you approve to run it
+          input {
+            message "Ready to apply?"
+            ok "Yes"
+          }
+          
           steps {
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     dir("${WORKSPACE}/${TF}") {
-                    echo 'hello'
-                    //sh 'terraform apply --auto-approve' //actually creates the resoruces and auto approved to bypass manual approval for automation
+                    sh 'terraform apply --auto-approve' //actually creates all resources created for you 
                     }
             }
           }
@@ -59,5 +75,5 @@ pipeline {
       cleanWs()           
     }      
   }
-}
+} 
           
