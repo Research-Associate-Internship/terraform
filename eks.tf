@@ -40,4 +40,4 @@ module "eks" {
     project = "interns"
     Creation = "terraform"
   }
-}
+
