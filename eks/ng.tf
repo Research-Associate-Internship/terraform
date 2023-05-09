@@ -14,6 +14,11 @@ resource "aws_eks_node_group" "nextgen-node-group" {
     max_unavailable = 1
   }
 
+  remote_access {
+    ec2_ssh_key               = "bastion"
+    //source_security_group_ids = [aws_security_group.something.id]
+  }
+
   depends_on = [
     aws_iam_role_policy_attachment.nextgen-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.nextgen-AmazonEKS_CNI_Policy,
