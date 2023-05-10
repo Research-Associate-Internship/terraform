@@ -1,10 +1,10 @@
-resource "aws_eks_cluster" "devsecops" {
-  name     = "devsecops-cluster"
-  role_arn = aws_iam_role.devsecops-cluster.arn
+resource "aws_eks_cluster" "NextGenDS" {
+  name     = "NextGenDS-cluster"
+  role_arn = aws_iam_role.NextGenDS.arn
 
   vpc_config {
     //subnet_ids = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
-    subnet_ids = [module.vpc.private_subnets[0]]
+    subnet_ids = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
   }
    depends_on = [
     "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
@@ -17,7 +17,7 @@ resource "aws_eks_cluster" "devsecops" {
   }
 }
 
-resource "aws_iam_role" "devsecops-cluster" {
+resource "aws_iam_role" "NextGenDS" {
   name = "eks-cluster-role"
 
   assume_role_policy = <<POLICY
@@ -38,5 +38,5 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role = aws_iam_role.devsecops-cluster.name
+  role = aws_iam_role.NextGenDS.name
 }
