@@ -1,5 +1,5 @@
-resource "aws_lb" "ALB" {
-    name               = "ALB-DevSecOps"
+resource "aws_lb" "jenkins" {
+    name               = "Jenkins-ALB"
     internal           = false
     load_balancer_type = "application"
 
@@ -87,7 +87,7 @@ resource "aws_lb_target_group_attachment" "jenkins-attach" {
 }
 
 resource "aws_lb_listener" "jenkins-tg" {
-  load_balancer_arn = aws_lb.ALB.arn
+  load_balancer_arn = aws_lb.jenkins.arn
   port              = "80"
   protocol          = "HTTP"
 
