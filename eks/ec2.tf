@@ -3,7 +3,7 @@ resource "aws_instance" "eks-bastion" {
 
   instance_type = "t2.micro"
   associate_public_ip_address = "true"
-  key_name = "bastion"
+  key_name = "ec2"
   vpc_security_group_ids = [aws_security_group.bastion-sg.id]
   subnet_id = module.vpc.public_subnets[0]
 
