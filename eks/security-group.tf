@@ -49,7 +49,7 @@ resource "aws_security_group" "node-group-sg" {
   }
 
   tags = {
-    Name = "eks-bastion-sg"
+    Name = "node-group-sg"
     Department = "DevSecOps Associate" 
     Creation = "terraform"
   }
