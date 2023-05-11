@@ -97,7 +97,7 @@ resource "aws_lb_listener" "jenkins-tg" {
   }
 }
 
-resource "aws_lb_listener" "jenkins-tg" {
+resource "aws_lb_listener" "jenkins-tg-443" {
   load_balancer_arn = aws_lb.jenkins.arn
   port              = "443"
   protocol          = "HTTPS"
@@ -118,7 +118,7 @@ resource "aws_lb_listener" "vault-tg" {
   }
 }
 
-resource "aws_lb_listener" "vault-tg" {
+resource "aws_lb_listener" "vault-tg-443" {
   load_balancer_arn = aws_lb.vault.arn
   port              = "443"
   protocol          = "HTTPS"
