@@ -96,6 +96,18 @@ resource "aws_lb_listener" "jenkins-tg" {
     target_group_arn = aws_lb_target_group.jenkins.arn
   }
 }
+
+resource "aws_lb_listener" "jenkins-tg" {
+  load_balancer_arn = aws_lb.jenkins.arn
+  port              = "443"
+  protocol          = "HTTPS"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.jenkins.arn
+  }
+}
+
 resource "aws_lb_listener" "vault-tg" {
   load_balancer_arn = aws_lb.vault.arn
   port              = "80"
@@ -106,3 +118,12 @@ resource "aws_lb_listener" "vault-tg" {
   }
 }
 
+resource "aws_lb_listener" "vault-tg" {
+  load_balancer_arn = aws_lb.vault.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.vault.arn
+  }
+}
