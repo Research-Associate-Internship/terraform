@@ -7,7 +7,7 @@ pipeline {
       label 'workernode1'
     }
     parameters {
-      choice(name: 'Action', choices: 'apply', description: 'Manual build stages')
+      choice(name: 'Action', choices: 'noapply\napply', description: 'Manual build stages')
     }
 
     stages {
