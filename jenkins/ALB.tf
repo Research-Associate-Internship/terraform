@@ -101,7 +101,7 @@ resource "aws_lb_listener" "jenkins-tg-443" {
   load_balancer_arn = aws_lb.jenkins.arn
   port              = "443"
   protocol          = "HTTPS"
-   certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/8f526e3c-4f0d-479b-8491-9b0182949e64"
+  certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/8f526e3c-4f0d-479b-8491-9b0182949e64"
 
   default_action {
     type             = "forward"
