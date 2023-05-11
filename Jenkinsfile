@@ -46,8 +46,7 @@ pipeline {
           steps {
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     dir("${WORKSPACE}/${TF}") {
-                    echo 'hello'
-                    //sh 'terraform apply --auto-approve' //actually creates the resoruces and auto approved to bypass manual approval for automation
+                    sh 'terraform apply --auto-approve' //actually creates the resoruces and auto approved to bypass manual approval for automation
                     }
             }
           }
