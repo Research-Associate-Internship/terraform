@@ -1,5 +1,5 @@
 // global variable used to determine which terraform folder to use
-def TF = "eks"
+def TF = "jenkins"
 
 pipeline {
     // define which exact agent you want to run these instructions
