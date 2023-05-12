@@ -14,7 +14,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Get some code from a GitHub repository
-                //checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Research-Associate-Internship/terraform.git']]])
                 checkout scm
             }
         }  
