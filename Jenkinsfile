@@ -1,5 +1,5 @@
 // global variable used to determine which terraform folder to use
-def TF = "eks"
+def TF = "jenkins"
 
 pipeline {
     // define which exact agent you want to run these instructions
@@ -14,7 +14,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Get some code from a GitHub repository
-                //checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Research-Associate-Internship/terraform.git']]])
                 checkout scm
             }
         }  

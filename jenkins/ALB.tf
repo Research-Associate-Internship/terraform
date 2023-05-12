@@ -92,8 +92,13 @@ resource "aws_lb_listener" "jenkins-tg" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.jenkins.arn
+    type             = "redirect"
+    
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }
 
@@ -114,18 +119,23 @@ resource "aws_lb_listener" "vault-tg" {
   port              = "80"
   protocol          = "HTTP"
   default_action {
+    type             = "redirect"
+    
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "vault-tg-443" {
+  load_balancer_arn = aws_lb.vault.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/a8cc6704-b644-42e2-a13c-38ca0dc7947f"
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.vault.arn
   }
 }
-
-# resource "aws_lb_listener" "vault-tg-443" {
-#   load_balancer_arn = aws_lb.vault.arn
-#   port              = "443"
-#   protocol          = "HTTPS"
-#   certificate_arn   = 
-#   default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.vault.arn
-#   }
-# }
