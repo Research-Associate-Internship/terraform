@@ -1,44 +1,44 @@
 resource "aws_lb" "jenkins" {
-    name               = "Jenkins-ALB"
-    internal           = false
-    load_balancer_type = "application"
+  name               = "Jenkins-ALB"
+  internal           = false
+  load_balancer_type = "application"
 
-    security_groups = [aws_security_group.ALB-SG.id]
+  security_groups = [aws_security_group.ALB-SG.id]
 
-    subnets                                     = [
-        module.vpc.public_subnets[0]
-,
-        module.vpc.public_subnets[1]
-,
-    ]
+  subnets = [
+    module.vpc.public_subnets[0]
+    ,
+    module.vpc.public_subnets[1]
+    ,
+  ]
 
-    tags                                        = {
-        Department = "DevSecOps Associate"
-        Creation = "terraform"
-        Project = "intern"
-    }
+  tags = {
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
+    Project    = "intern"
+  }
 
 }
 
 resource "aws_lb" "vault" {
-    name               = "Vault-ALB"
-    internal           = false
-    load_balancer_type = "application"
+  name               = "Vault-ALB"
+  internal           = false
+  load_balancer_type = "application"
 
-    security_groups = [aws_security_group.ALB-SG.id]
+  security_groups = [aws_security_group.ALB-SG.id]
 
-    subnets                                     = [ 
-        module.vpc.public_subnets[0],
+  subnets = [
+    module.vpc.public_subnets[0],
 
-        module.vpc.public_subnets[1],
+    module.vpc.public_subnets[1],
 
-    ]
+  ]
 
-    tags                                        = {
-        Department = "DevSecOps Associate"
-        Creation = "terraform"
-        Project = "intern"
-    }
+  tags = {
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
+    Project    = "intern"
+  }
 
 }
 
@@ -47,16 +47,16 @@ resource "aws_lb_target_group" "jenkins" {
   port     = 8080
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
-  
+
   health_check {
-    path     = "/login"
+    path = "/login"
   }
 
-  tags                                        = {
-        Department = "DevSecOps Associate"
-        Creation = "terraform"
-        Project = "intern"
-    }
+  tags = {
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
+    Project    = "intern"
+  }
 
 }
 
@@ -66,11 +66,11 @@ resource "aws_lb_target_group" "vault" {
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
 
-  tags                                        = {
-        Department = "DevSecOps Associate"
-        Creation = "terraform"
-        Project = "intern"
-    }
+  tags = {
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
+    Project    = "intern"
+  }
 
 }
 #instance must be running to attach
@@ -92,8 +92,8 @@ resource "aws_lb_listener" "jenkins-tg" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "redirect"
-    
+    type = "redirect"
+
     redirect {
       port        = "443"
       protocol    = "HTTPS"
@@ -119,8 +119,8 @@ resource "aws_lb_listener" "vault-tg" {
   port              = "80"
   protocol          = "HTTP"
   default_action {
-    type             = "redirect"
-    
+    type = "redirect"
+
     redirect {
       port        = "443"
       protocol    = "HTTPS"

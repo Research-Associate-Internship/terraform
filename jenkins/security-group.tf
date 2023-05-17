@@ -1,7 +1,7 @@
 #####Bastion Security Group#####
 resource "aws_security_group" "MYSG" {
-  name = "Bastion-SG"
-  vpc_id      = module.vpc.vpc_id
+  name   = "Bastion-SG"
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port = 22
@@ -14,24 +14,24 @@ resource "aws_security_group" "MYSG" {
   }
 
 
-   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name = "bastionSG-DevSecOps"
-    Department = "DevSecOps Associate" 
-    Creation = "terraform"
+    Name       = "bastionSG-DevSecOps"
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
   }
 
 }
 #####Jenkins master and builder Security Group#####
 resource "aws_security_group" "JSG" {
-  name = "Jenkins-SG"
-  vpc_id      = module.vpc.vpc_id
+  name   = "Jenkins-SG"
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port = 22
@@ -49,24 +49,24 @@ resource "aws_security_group" "JSG" {
     security_groups = [aws_security_group.ALB-SG.id]
   }
 
-   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-    tags = {
-    Name = "JSG-DevSecOps"
-    Department = "DevSecOps Associate" 
-    Creation = "terraform"
+  tags = {
+    Name       = "JSG-DevSecOps"
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
   }
 
 }
 #####Application load balancer Security Group#####
-  resource "aws_security_group" "ALB-SG" {
-  name = "ALB-SG"
-  vpc_id      = module.vpc.vpc_id
+resource "aws_security_group" "ALB-SG" {
+  name   = "ALB-SG"
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port = 80
@@ -84,26 +84,26 @@ resource "aws_security_group" "JSG" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-    tags = {
-    Name = "ALBSG-DevSecOps"
-    Department = "DevSecOps Associate" 
-    Creation = "terraform"
-    project = "interns"
+  tags = {
+    Name       = "ALBSG-DevSecOps"
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
+    project    = "interns"
   }
 
 }
 
 #####Vault Security Group#####
 resource "aws_security_group" "vault-SG" {
-  name = "Vault-SG"
-  vpc_id      = module.vpc.vpc_id
+  name   = "Vault-SG"
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port = 22
@@ -114,20 +114,20 @@ resource "aws_security_group" "vault-SG" {
   }
 
   ingress {
-      from_port = 8200
-      to_port   = 8200
-      protocol  = "tcp"
+    from_port = 8200
+    to_port   = 8200
+    protocol  = "tcp"
 
-      security_groups = [aws_security_group.ALB-SG.id]
-    }
+    security_groups = [aws_security_group.ALB-SG.id]
+  }
 
   ingress {
-      from_port = 8200
-      to_port   = 8200
-      protocol  = "tcp"
+    from_port = 8200
+    to_port   = 8200
+    protocol  = "tcp"
 
-      cidr_blocks = [format("%s/32", aws_instance.builder.private_ip)]
-    }
+    cidr_blocks = [format("%s/32", aws_instance.builder.private_ip)]
+  }
 
   ingress {
     from_port = 8200
@@ -138,17 +138,17 @@ resource "aws_security_group" "vault-SG" {
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-    tags = {
-    Name = "Vault-DevSecOps"
-    Department = "DevSecOps Associate" 
-    Creation = "terraform"
-    project = "interns"
+  tags = {
+    Name       = "Vault-DevSecOps"
+    Department = "DevSecOps Associate"
+    Creation   = "terraform"
+    project    = "interns"
   }
 
 }
