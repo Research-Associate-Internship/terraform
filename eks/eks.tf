@@ -6,9 +6,13 @@ resource "aws_eks_cluster" "NextGenDS" {
     //subnet_ids = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
     subnet_ids = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
   }
+
+   enabled_cluster_log_types = ["api", "audit"]
+   
    depends_on = [
     "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
   ]
+  
 
   tags = {
     Department = "DevSecOps Associate"
