@@ -7,17 +7,17 @@ resource "aws_eks_cluster" "NextGenDS" {
     subnet_ids = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
   }
 
-   enabled_cluster_log_types = ["api", "audit"]
-   
-   depends_on = [
+  enabled_cluster_log_types = ["api", "audit"]
+
+  depends_on = [
     "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
   ]
-  
+
 
   tags = {
     Department = "DevSecOps Associate"
-    project = "interns"
-    Creation = "terraform"
+    project    = "interns"
+    Creation   = "terraform"
   }
 }
 
@@ -42,5 +42,5 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role = aws_iam_role.NextGenDS.name
+  role       = aws_iam_role.NextGenDS.name
 }

@@ -8,7 +8,7 @@ resource "aws_ecr_repository" "ecr" {
 
   tags = {
     Department = "DevSecOps Associate"
-    project = "interns"
-    Creation = "terraform"
+    project    = "interns"
+    Creation   = "terraform"
   }
 }

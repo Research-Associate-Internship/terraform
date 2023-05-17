@@ -2,7 +2,7 @@ resource "aws_eks_node_group" "NextGenDS-node-group" {
   cluster_name    = aws_eks_cluster.NextGenDS.name
   node_group_name = "NextGenDS-node-group"
   node_role_arn   = aws_iam_role.NextGenDS-role.arn
-  subnet_ids      = [module.vpc.private_subnets[0]]//, module.vpc.private_subnets[1]]
+  subnet_ids      = [module.vpc.private_subnets[0]] //, module.vpc.private_subnets[1]]
 
   scaling_config {
     desired_size = 1
@@ -30,8 +30,8 @@ resource "aws_eks_node_group" "NextGenDS-node-group" {
 
   tags = {
     Department = "DevSecOps Associate"
-    project = "interns"
-    Creation = "terraform"
+    project    = "interns"
+    Creation   = "terraform"
   }
 
 }
