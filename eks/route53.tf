@@ -4,7 +4,7 @@ resource "aws_route53_record" "NextGenDS" {
   type    = "A"
 
   alias {
-    name                   = "k8s-node-ALB-476907778.us-east-1.elb.amazonaws.com"
+    name                   = "ac4dee8cfa1124512b5d449e8790fe09-1851524569.us-east-1.elb.amazonaws.com"
     zone_id                = "Z35SXDOTRQ7X7K"
     evaluate_target_health = true
   }
