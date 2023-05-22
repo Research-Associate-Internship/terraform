@@ -48,7 +48,7 @@ pipeline {
             }
           }
         }
-
+        // Alternative to build with parameterto implement a manual stage with input
         // stage("apply") {
         //   //Condition to only run this stage if you approve to run it
         //   input {
