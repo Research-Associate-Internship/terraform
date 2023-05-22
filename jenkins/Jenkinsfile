@@ -1,3 +1,5 @@
+// global variable used to determine which terraform folder to use
+def TF = "jenkins"
 
 pipeline {
     // define which exact agent you want to run these instructions
@@ -20,9 +22,9 @@ pipeline {
         stage('terraform initialize') {
             steps {
               withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-               
+                dir("${WORKSPACE}/${TF}") {
                 sh 'terraform init' // initializes your terraform env
-                
+                }
               }
             }
         }
@@ -31,9 +33,9 @@ pipeline {
           steps {
             // withCredentials passes your aws access key credentials thats stored in jenkins
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                 
-              sh 'terraform plan' //checks what will be created before actually creating resources 
-                    
+                    dir("${WORKSPACE}/${TF}") {
+                    sh 'terraform plan' //checks what will be created before actually creating resources 
+                    }
             }
           }
         }
@@ -42,13 +44,13 @@ pipeline {
           when { expression { params.Action == 'apply' } }
           steps {
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                 
-              sh 'terraform apply --auto-approve' //actually creates the resoruces and auto approved to bypass manual approval for automation
-                    
+                    dir("${WORKSPACE}/${TF}") {
+                    sh 'terraform apply --auto-approve' //actually creates the resoruces and auto approved to bypass manual approval for automation
+                    }
             }
           }
         }
-        // Alternative to build with parameterto implement a manual stage with input
+        // alternative method to build with parameter for manual stage wth input
         // stage("apply") {
         //   //Condition to only run this stage if you approve to run it
         //   input {
