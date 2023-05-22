@@ -23,6 +23,7 @@ resource "aws_eks_node_group" "NextGenDS-node-group" {
     aws_iam_role_policy_attachment.NextGenDS-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.NextGenDS-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.NextGenDS-AmazonEC2ContainerRegistryReadOnly,
+    aws_iam_role_policy_attachment.NextGenDS-CloudWatchLogsFullAccess,
   ]
 
   ami_type       = "AL2_x86_64"
@@ -64,4 +65,9 @@ resource "aws_iam_role_policy_attachment" "NextGenDS-AmazonEKSWorkerNodePolicy" 
 resource "aws_iam_role_policy_attachment" "NextGenDS-AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.NextGenDS-role.name
+}
+
+resource "aws_iam_role_policy_attachment" "NextGenDS-CloudWatchLogsFullAccess" {
+ policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+ role    = aws_iam_role.NextGenDS-role.name
 }
