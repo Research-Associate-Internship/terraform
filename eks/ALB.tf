@@ -41,14 +41,30 @@ resource "aws_lb_target_group_attachment" "vault-attach" {
   port             = 30000
 }
 
-# resource "aws_lb_listener" "jenkins-tg-443" {
-#   load_balancer_arn = aws_lb.jenkins.arn
-#   port              = "443"
-#   protocol          = "HTTPS"
-#   certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/8f526e3c-4f0d-479b-8491-9b0182949e64"
+resource "aws_lb_listener" "kibana-tg-443" {
+  load_balancer_arn = aws_lb.kibana.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/7d3e3e0b-8306-43d5-9858-878fe484c8ca"
 
-#   default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.kibana.arn
-#   }
-# }
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.kibana.arn
+  }
+}
+
+resource "aws_lb_listener" "kibana-tg" {
+  load_balancer_arn = aws_lb.kibana.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
