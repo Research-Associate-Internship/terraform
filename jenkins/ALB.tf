@@ -66,6 +66,10 @@ resource "aws_lb_target_group" "vault" {
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
 
+  health_check {
+    path = "/login"
+  }
+
   tags = {
     Department = "DevSecOps Associate"
     Creation   = "terraform"
