@@ -159,7 +159,7 @@ resource "aws_iam_role_policy_attachment" "GenDS-CloudWatchLogsFullAccess" {
 
 resource "aws_security_group" "bastion-sg" {
   name                      = "eks-bastion-sg"
-  vpc_id                    = var.Vpc_id
+  vpc_id                    = module.vpc.vpc_id
 
   ingress {
     from_port               = 22
