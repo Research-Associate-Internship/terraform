@@ -23,3 +23,30 @@ variable "Vpc_id"{
     description        = "List of availability zones"
     default            = module.vpc.vpc_id
 }
+
+variable "region" {
+  description = "AWS region"
+  default     = "us-east-1"
+}
+
+data "terraform_remote_state" "eks" {
+  backend = "s3"
+
+  config = {
+     bucket = "rac2-nextgends"
+     key = "terraform.state"
+     region = "us-east-1"
+  }
+}
+
+variable "cerificate_arn" {
+  type               = string
+  description = "Certificte ARN for HTTPS"
+  default     = data.terraform_remote_state.acm.cerificate_arn
+}
+
+variable "target_id" {
+  type               = string
+  description = "target Id for ALB"
+  default     = data.terraform_remote_state.eks.worker_node_instance_ids[0]
+}
