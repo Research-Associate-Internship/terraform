@@ -1,7 +1,7 @@
 variable "vpc_cidr" {}
-variable "subnet_1_cidr" {}
-variable "subnet_2_cidr" {}
-variable "subnet_3_cidr" {}
-variable "subnet_4_cidr" {}
-variable "subnet_5_cidr" {}
-variable "subnet_6_cidr" {}
+variable "public_subnet_1_cidr" {}
+variable "public_subnet_2_cidr" {}
+variable "private_subnet_1_cidr" {}
+variable "private_subnet_2_cidr" {}
+variable "private_subnet_3_cidr" {}
+variable "private_subnet_4_cidr" {}
