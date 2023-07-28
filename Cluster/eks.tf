@@ -1,10 +1,10 @@
 resource "aws_eks_cluster" "GenDS" {
-  name     = "GenDS-cluster"
+  name     = "Rac2-NextGenDS-cluster"
   role_arn = aws_iam_role.GenDS.arn
   version = "1.27"
   enabled_cluster_log_types = ["api", "audit","authenticator","scheduler"]
   vpc_config {
-    subnet_ids = [var.private_subnets[0], var.private_subnets[1],var.private_subnets[2], var.private_subnets[3]]
+    subnet_ids = [module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
   }
   depends_on = [
     "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
@@ -42,11 +42,11 @@ tags = {
   }
 }
 
-resource "aws_eks_node_group" "GenDS-node-group1" {
+resource "aws_eks_node_group" "RAC2-NextGenDS-node-group1" {
   cluster_name              = aws_eks_cluster.GenDS.name
-  node_group_name           = "GenDS-node-group1"
+  node_group_name           = "RAC2-NextGenDS-node-group1"
   node_role_arn             = aws_iam_role.GenDS-role.arn
-  subnet_ids                = [var.private_subnets[0], var.private_subnets[1],var.private_subnets[2], var.private_subnets[3]]
+  subnet_ids                = [module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
 
   scaling_config {
     desired_size            = 1
@@ -78,11 +78,11 @@ resource "aws_eks_node_group" "GenDS-node-group1" {
 
 }
 
-resource "aws_eks_node_group" "GenDS-node-group2" {
+resource "aws_eks_node_group" "RAC2-NextGenDS-node-group2" {
   cluster_name                = aws_eks_cluster.GenDS.name
-  node_group_name             = "GenDS-node-group2"
+  node_group_name             = "RAC2-NextGenDS-node-group2"
   node_role_arn               = aws_iam_role.GenDS-role.arn
-  subnet_ids                  = [var.private_subnets[0], var.private_subnets[1],var.private_subnets[2], var.private_subnets[3]]
+  subnet_ids                  = [module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
 
   scaling_config {
     desired_size              = 1

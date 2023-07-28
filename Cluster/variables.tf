@@ -1,14 +1,14 @@
 variable "private_subnets" {
     type               = list(string)
     description        = "List of private subnets"
-    default            =["10.0.0.128/26", "10.0.0.64/27,", "10.0.0.96/27", "10.0.0.192/26"]
+    default            =["subnet-036334c85967c244c", "subnet-01ded683ede10c12f", "subnet-0b44842e06fffde10", "subnet-0208a5229440e1cfb"]
 
 }
 
 variable "public_subnets" {
     type               = list(string)
     description        = "List of public subnets"
-    default            =["10.0.0.0/27", "10.0.0.32/27"]
+    default            =["subnet-0d71d482d46a8de2c", "subnet-0d3bb4ed495617d63"]
 
 }
 
