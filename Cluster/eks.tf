@@ -4,7 +4,7 @@ resource "aws_eks_cluster" "GenDS" {
   version = "1.27"
   enabled_cluster_log_types = ["api", "audit","authenticator","scheduler"]
   vpc_config {
-    subnet_ids = [module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
+    subnet_ids = [var.private_subnets[0],var.private_subnets[1],var.private_subnets[2],var.private_subnets[3]]
   }
   depends_on = [
     "aws_iam_role_policy_attachment.AmazonEKSClusterPolicy"
@@ -46,7 +46,7 @@ resource "aws_eks_node_group" "RAC2-NextGenDS-node-group1" {
   cluster_name              = aws_eks_cluster.GenDS.name
   node_group_name           = "RAC2-NextGenDS-node-group1"
   node_role_arn             = aws_iam_role.GenDS-role.arn
-  subnet_ids                = [module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
+  subnet_ids                = [var.private_subnets[0],var.private_subnets[1],var.private_subnets[2],var.private_subnets[3]]
 
   scaling_config {
     desired_size            = 1
@@ -82,7 +82,7 @@ resource "aws_eks_node_group" "RAC2-NextGenDS-node-group2" {
   cluster_name                = aws_eks_cluster.GenDS.name
   node_group_name             = "RAC2-NextGenDS-node-group2"
   node_role_arn               = aws_iam_role.GenDS-role.arn
-  subnet_ids                  = [module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
+  subnet_ids                  = [var.private_subnets[0],var.private_subnets[1],var.private_subnets[2],var.private_subnets[3]]
 
   scaling_config {
     desired_size              = 1
@@ -159,7 +159,7 @@ resource "aws_iam_role_policy_attachment" "GenDS-CloudWatchLogsFullAccess" {
 
 resource "aws_security_group" "bastion-sg" {
   name                      = "eks-bastion-sg"
-  vpc_id                    = module.vpc.vpc_id
+  vpc_id                    = var.Vpc_id
 
   ingress {
     from_port               = 22
