@@ -50,3 +50,15 @@ variable "target_id" {
   description = "target Id for ALB"
   default     = data.terraform_remote_state.eks.worker_node_instance_ids[0]
 }
+
+variable "health_check" {
+    type = map(string)
+    default = {
+        "timeout" = "10"
+        "Interval" = "20"
+        "path" ="/"
+        "port"="80"
+        "unhealthy_threshold" ="2"
+        "healthy_threshold"  = "3"
+    }
+}
