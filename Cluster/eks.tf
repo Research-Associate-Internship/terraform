@@ -181,3 +181,7 @@ resource "aws_security_group" "bastion-sg" {
     Envirornment            = "Production"
   }
 }
+
+output   target_group {
+  value       = aws_eks_cluster.aws_eks_node_group.id
+}

@@ -1,14 +1,12 @@
 variable "private_subnets" {
     type               = list(string)
     description        = "List of private subnets"
-    default            =[module.vpc.private_subnet_1_cidr,module.vpc.private_subnet_2_cidr,module.vpc.private_subnet_3_cidr,module.vpc.private_subnet_4_cidr]
 
 }
 
 variable "public_subnets" {
     type               = list(string)
     description        = "List of public subnets"
-    default            =["module.vpc.public_subnet_1_cidr", "module.vpc.public_subnet_2_cidr"]
 
 }
 
@@ -21,34 +19,19 @@ variable "azs"{
 variable "Vpc_id"{
     type               = string
     description        = "List of availability zones"
-    default            = module.vpc.vpc_id
-}
-
-variable "region" {
-  description = "AWS region"
-  default     = "us-east-1"
-}
-
-data "terraform_remote_state" "eks" {
-  backend = "s3"
-
-  config = {
-     bucket = "rac2-nextgends"
-     key = "terraform.state"
-     region = "us-east-1"
-  }
+    
 }
 
 variable "cerificate_arn" {
   type               = string
   description = "Certificte ARN for HTTPS"
-  default     = data.terraform_remote_state.acm.cerificate_arn
+  default     = "arn:aws:acm:us-east-1:853931821519:certificate/3d7723cf-2431-41a4-8fc5-a60dd3fa02fa"
 }
 
 variable "target_id" {
   type               = string
   description = "target Id for ALB"
-  default     = data.terraform_remote_state.eks.worker_node_instance_ids[0]
+  
 }
 
 variable "health_check" {
