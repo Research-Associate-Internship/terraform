@@ -31,5 +31,5 @@ variable "cerificate_arn" {
 variable "target_id" {
   type               = string
   description = "target Id for ALB"
-  
+  default      = "aws_eks_node_group.RAC2-NextGenDS-node-group1.id"
 }
