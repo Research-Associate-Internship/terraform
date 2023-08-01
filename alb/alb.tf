@@ -3,7 +3,7 @@ resource "aws_lb" "NextGenDS" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.NextGenDS-alb-sg.id]
-  subnets            = [var.private_subnets[0],var.private_subnets[1],var.private_subnets[2],var.private_subnets[3]]
+  subnets            = [var.private_subnets[0],var.private_subnets[1]]
   enable_cross_zone_load_balancing ="true"
 
   tags = {
@@ -33,7 +33,6 @@ resource "aws_lb_listener" "NextGenDS-https-listener" {
   load_balancer_arn  = aws_lb.NextGenDS.arn
   port               = "443"
   protocol           = "HTTPS"
-  ssl_policy         = "ELBSecurityPolicy -2016-08"
   certificate_arn    = var.cerificate_arn
 
   default_action {
@@ -57,7 +56,7 @@ resource "aws_lb_target_group" "NextGenDS-target-group" {
 
 resource "aws_lb_target_group_attachment" "NextGenDS_target-group-attach" {
   target_group_arn  = aws_lb_target_group.NextGenDS-target-group.arn
-  target_id         = var.eks_node_ids
+  target_id         = var.eks_node_ids[0]
   port              = 80
 }
 

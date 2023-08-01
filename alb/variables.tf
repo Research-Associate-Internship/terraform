@@ -22,5 +22,5 @@ variable "cerificate_arn" {
 }
 
 variable "eks_node_ids" {
-  type               = string
+  type               = list(string)
 }

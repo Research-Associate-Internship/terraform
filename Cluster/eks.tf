@@ -182,6 +182,13 @@ resource "aws_security_group" "bastion-sg" {
   }
 }
 
+data "aws_instances" "nodes" {
+    filter {
+        name = "tag:eks:cluster-name" 
+        values =["Rac2-NextGenDS-cluster"]
+    }
+}
+
 output eks_node_ids {
-  value   = aws_eks_node_group.RAC2-NextGenDS-node-group1.id
+  value       = data.aws_instances.nodes.ids
 }
