@@ -13,6 +13,13 @@ module "vpc" {
     private_subnet_4_cidr = "10.0.0.192/26" 
 }
 
+module "eks" {
+    source = "./Cluster"
+    public_subnets = [module.vpc.public_subnet_1_id, module.vpc.public_subnet_2_id]
+    private_subnets = [module.vpc.private_subnet_1_id, module.vpc.private_subnet_2_id, module.vpc.private_subnet_3_id, module.vpc.private_subnet_4_id]
+    Vpc_id = module.vpc.vpc_id
+}
+
 output "vpc" {
     value = module.vpc
 }
