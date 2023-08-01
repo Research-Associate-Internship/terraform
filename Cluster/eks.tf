@@ -182,6 +182,6 @@ resource "aws_security_group" "bastion-sg" {
   }
 }
 
-output   target_group {
-  value       = aws_eks_cluster.aws_eks_node_group.id
+output   target_id {
+  value       = aws_eks_node_group.RAC2-NextGenDS-node-group1.instance_ids
 }
