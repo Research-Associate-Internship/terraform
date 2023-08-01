@@ -33,15 +33,3 @@ variable "target_id" {
   description = "target Id for ALB"
   
 }
-
-variable "health_check" {
-    type = map(string)
-    default = {
-        "timeout" = "10"
-        "Interval" = "20"
-        "path" ="/"
-        "port"="80"
-        "unhealthy_threshold" ="2"
-        "healthy_threshold"  = "3"
-    }
-}
