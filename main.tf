@@ -20,6 +20,16 @@ module "eks" {
     Vpc_id = module.vpc.vpc_id
 }
 
+module "deployNode" {
+    source="./deployNode"
+    availability_zone = "us-east-1a"
+    instance_type = "t3.xlarge"
+    region = "us-east-1"
+    vpc_id = module.vpc.vpc_id
+    subnet_id = module.vpc.private_subnet_2_id
+}
+
+
 output "vpc" {
     value = module.vpc
 }
