@@ -1,25 +1,19 @@
-
-resource "aws_subnet" "ngds_subnet_deployNode" {
-  vpc_id            = var.vpc_cidr
-  cidr_block        = var.subnet_cidr
-  availability_zone = var.availability_zone
-}
-
 resource "aws_security_group" "ngds_deployNode_sg" {
   name_prefix = "ngds_deployNode_sg"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    security_groups = [var.bastion_sg_id] ## Needed to be updated ##
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port   = 50000
-    to_port     = 50000
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
-    security_groups = [var.jenkins_sg_id] ## Needed to be updated ##
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
    egress {
@@ -44,17 +38,13 @@ resource "aws_security_group" "ngds_deployNode_sg" {
   }
 }
 
-resource "aws_key_pair" "ssh_key" {
-  key_name   = "rac2-root"
-}
-
 resource "aws_instance" "ngds-deployNode" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = var.instance_type
-  key_name      = aws_key_pair.ssh_key.key_name
-  subnet_id     = aws_subnet.ngds_subnet_deployNode.id
+  key_name      = "rac2-root"
+  subnet_id     = var.subnet_id
   security_groups = [
-    aws_security_group.instance_sg.id
+    aws_security_group.ngds_deployNode_sg.id
   ]
 
   root_block_device {
