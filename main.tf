@@ -4,7 +4,7 @@ provider "aws" {
 
 module "ecr" {
     source = "./ecr"
-    erc_name = "rac2-devsecops"
+    ecr_name = "rac2-devsecops"
 }
 
 module "vpc" {

@@ -50,6 +50,9 @@ resource "aws_instance" "ngds-deployNode" {
   root_block_device {
     volume_size = 100
   }
+  lifecycle {
+    ignore_changes = [disable_api_termination, ebs_optimized, hibernation, security_groups, credit_specification, network_interface, ephemeral_block_device]
+  }
 
   tags = {
     "Name" = "ngds-deployNode"
