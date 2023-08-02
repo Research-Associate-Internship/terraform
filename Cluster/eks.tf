@@ -182,3 +182,14 @@ resource "aws_security_group" "bastion-sg" {
     Envirornment            = "Production"
   }
 }
+
+data "aws_instances" "nodes" {
+    filter {
+        name = "tag:eks:cluster-name" 
+        values =["Rac2-NextGenDS-cluster"]
+    }
+}
+
+output eks_node_ids {
+  value       = data.aws_instances.nodes.ids
+}

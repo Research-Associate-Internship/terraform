@@ -18,6 +18,17 @@ module "eks" {
     public_subnets = [module.vpc.public_subnet_1_id, module.vpc.public_subnet_2_id]
     private_subnets = [module.vpc.private_subnet_1_id, module.vpc.private_subnet_2_id, module.vpc.private_subnet_3_id, module.vpc.private_subnet_4_id]
     Vpc_id = module.vpc.vpc_id
+    
+}
+
+module "alb" {
+    source = "./alb"
+    public_subnets = [module.vpc.public_subnet_1_id, module.vpc.public_subnet_2_id]
+    private_subnets = [module.vpc.private_subnet_1_id, module.vpc.private_subnet_2_id, module.vpc.private_subnet_3_id, module.vpc.private_subnet_4_id]
+    Vpc_id = module.vpc.vpc_id
+    eks_node_ids=module.eks.eks_node_ids
+    cerificate_arn="arn:aws:acm:us-east-1:853931821519:certificate/3d7723cf-2431-41a4-8fc5-a60dd3fa02fa"
+
 }
 
 module "deployNode" {
