@@ -4,7 +4,7 @@ def TF = "jenkins"
 pipeline {
     // define which exact agent you want to run these instructions
     agent {
-      label 'workernode1'
+      label 'workernode-rac2'
     }
     parameters {
       choice(name: 'Action', choices: 'noapply\napply', description: 'Manual build stages')
