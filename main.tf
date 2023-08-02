@@ -29,6 +29,12 @@ module "deployNode" {
     subnet_id = module.vpc.private_subnet_2_id
 }
 
+module "bastion" {
+    source = "./Bastion"
+    instance_type = "t3.xlarge"
+    public_subnet_2_id = module.vpc.public_subnet_2_id
+    bastion_sg_id = module.eks.bastion_sg_id
+}
 
 output "vpc" {
     value = module.vpc
