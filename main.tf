@@ -47,6 +47,13 @@ module "bastion" {
     bastion_sg_id = module.eks.bastion_sg_id
 }
 
+module "route53" {
+    source = "./route53"
+    alb_zone_id = module.alb.lb_zone_id
+    alb_dns_name = module.alb.lb_dns_name
+    ngds_name = "rac2-nextgends.axle-interns.com"
+}
+
 output "vpc" {
     value = module.vpc
 }
