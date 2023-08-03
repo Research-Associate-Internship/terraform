@@ -22,7 +22,9 @@ pipeline {
         stage('terraform initialize') {
             steps {
               withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                dir("${WORKSPACE}/${TF}") {
+                dir("${WORKSPACE}") {
+                sh 'pwd'
+                sh 'ls -la'
                 sh 'terraform init' // initializes your terraform env
                 }
               }
@@ -33,7 +35,7 @@ pipeline {
           steps {
             // withCredentials passes your aws access key credentials thats stored in jenkins
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    dir("${WORKSPACE}/${TF}") {
+                    dir("${WORKSPACE}/") {
                     sh 'terraform plan' //checks what will be created before actually creating resources 
                     }
             }
