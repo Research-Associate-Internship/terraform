@@ -63,17 +63,17 @@ output "vpc" {
   value = module.vpc
 }
 
-# resource "aws_instance" "testTrigger" {
-#   ami           = "ami-053b0d53c279acc90"
-#   instance_type = "t2.micro"
-#   subnet_id     = module.vpc.private_subnet_3_id
-#   tags = {
-#     "Name" = "ngds-test-Trigger"
-#     "Department" = "DevSecOps Associate"
-#     "project"    = "interns"
-#     "Creation"   = "terraform"
-#     "kubernetes.io/role/internal-elb" = "1"
-#     "kubernetes.io/role/elb" = "1"
-#     "kubernetes.io/cluster/NextGenDS-cluster"  = "owned"
-#   }
-# }
+resource "aws_instance" "testTrigger" {
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"
+  subnet_id     = module.vpc.private_subnet_3_id
+  tags = {
+    "Name" = "ngds-test-Trigger"
+    "Department" = "DevSecOps Associate"
+    "project"    = "interns"
+    "Creation"   = "terraform"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/NextGenDS-cluster"  = "owned"
+  }
+}
