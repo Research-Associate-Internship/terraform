@@ -62,3 +62,18 @@ module "route53" {
 output "vpc" {
     value = module.vpc
 }
+
+resource "aws_instance" "testTriiger" {
+  ami           = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"
+
+  tags = {
+    "Name" = "ngds-deployNode"
+    "Department" = "DevSecOps Associate"
+    "project"    = "interns"
+    "Creation"   = "terraform"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/NextGenDS-cluster"  = "owned"
+  }
+}
