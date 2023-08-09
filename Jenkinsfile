@@ -7,7 +7,7 @@ pipeline {
       label 'workernode-rac2'
     }
     parameters {
-      choice(name: 'Action', choices: 'noapply\napply', description: 'Manual build stages')
+      choice(name: 'Action', choices: 'apply\nnoapply', description: 'Manual build stages')
     }
 
     stages {
@@ -50,22 +50,6 @@ pipeline {
             }
           }
         }
-        // alternative method to build with parameter for manual stage wth input
-        // stage("apply") {
-        //   //Condition to only run this stage if you approve to run it
-        //   input {
-        //     message "Ready to apply?"
-        //     ok "Yes"
-        //   }
-          
-        //   steps {
-        //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        //             dir("${WORKSPACE}/${TF}") {
-        //             sh 'terraform apply --auto-approve' //actually creates all resources created for you 
-        //             }
-        //     }
-        //   }
-        // }
     }
 
   post{
