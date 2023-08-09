@@ -68,7 +68,7 @@ resource "aws_instance" "testTrigger" {
   instance_type = "t2.micro"
   subnet_id     = module.vpc.private_subnet_3_id
   tags = {
-    "Name" = "ngds-deployNode"
+    "Name" = "ngds-test-Trigger"
     "Department" = "DevSecOps Associate"
     "project"    = "interns"
     "Creation"   = "terraform"
