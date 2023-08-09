@@ -3,7 +3,7 @@ resource "aws_lb" "NextGenDS" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.NextGenDS-alb-sg.id]
-  subnets            = [var.private_subnets[0],var.private_subnets[1]]
+  subnets            = [var.public_subnets[0],var.public_subnets[1]]
   enable_cross_zone_load_balancing ="true"
 
   tags = {
@@ -46,6 +46,9 @@ resource "aws_lb_target_group" "NextGenDS-target-group" {
   port               = 80
   protocol           = "HTTP"
   vpc_id             = var.Vpc_id
+  health_check {
+    path = "/health"
+  }
   tags = {
     Department       = "DevOps RAC2"
     Creation         = "terraform"
@@ -80,6 +83,41 @@ resource "aws_security_group" "NextGenDS-alb-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Department       = "DevOps RAC2"
+    Creation         = "terraform"
+    Project          = "intern"
+    Envirornment     = "Production"
+  }
+
+}
+
+resource "aws_security_group" "NextGenDS-target-sg" {
+  name   = "NextGenDS-target-sg"
+  vpc_id = var.Vpc_id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
