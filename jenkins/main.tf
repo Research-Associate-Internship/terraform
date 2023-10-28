@@ -59,7 +59,6 @@ resource "aws_instance" "builder" {
 #   key_name = "bastion"
 #   vpc_security_group_ids = [aws_security_group.JSG.id]
 #   subnet_id = "${element(module.vpc.private_subnets, 0)}"
-
 #   tags = {
 #     Name = "jenkins-builder2"
 #     Department = "DevSecOps Associate" 
