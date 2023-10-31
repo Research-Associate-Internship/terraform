@@ -1,6 +1,6 @@
-resource "aws_eks_node_group" "NextGenDS-node-group" {
-  cluster_name    = aws_eks_cluster.NextGenDS.name
-  node_group_name = "NextGenDS-node-group"
+resource "aws_eks_node_group" "NextGenDS-rac3-node-group" {
+  cluster_name    = aws_eks_cluster.NextGenDS-rac3.name
+  node_group_name = "NextGenDS-rac3-node-group"
   node_role_arn   = aws_iam_role.NextGenDS-role.arn
   subnet_ids      = [module.vpc.private_subnets[0]] //, module.vpc.private_subnets[1]]
 
