@@ -22,7 +22,7 @@ resource "aws_eks_cluster" "NextGenDS-rac3" {
 }
 
 resource "aws_iam_role" "NextGenDS" {
-  name = "eks-cluster-role"
+  name = "eks-cluster-role1"
 
   assume_role_policy = <<POLICY
 {
