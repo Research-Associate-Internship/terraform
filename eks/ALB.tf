@@ -72,75 +72,76 @@
 #     }
 #   }
 # }
-resource "aws_lb" "NextGenDS-rac3" {
-  name               = "NextGenDS-rac3-ALB"
-  internal           = false
-  load_balancer_type = "application"
+#-----------------------------------
+# resource "aws_lb" "NextGenDS-rac3" {
+#   name               = "NextGenDS-rac3-ALB"
+#   internal           = false
+#   load_balancer_type = "application"
 
-  security_groups = [aws_security_group.bastion-sg.id]
+#   security_groups = [aws_security_group.bastion-sg.id]
 
-  subnets = [
-    module.vpc.public_subnets[0]
-    ,
-    module.vpc.public_subnets[1]
-    ,
-  ]
+#   subnets = [
+#     module.vpc.public_subnets[0]
+#     ,
+#     module.vpc.public_subnets[1]
+#     ,
+#   ]
 
-  tags = {
-    Department = "DevSecOps Associate"
-    Creation   = "terraform"
-    Project    = "intern"
-  }
+#   tags = {
+#     Department = "DevSecOps Associate"
+#     Creation   = "terraform"
+#     Project    = "intern"
+#   }
 
-}
+# }
 
-resource "aws_lb_target_group" "NextGenDS-rac3" {
-  name     = "NextGenDS-rac3-TG"
-  port     = 8080
-  protocol = "HTTP"
-  vpc_id   = module.vpc.vpc_id
+# resource "aws_lb_target_group" "NextGenDS-rac3" {
+#   name     = "NextGenDS-rac3-TG"
+#   port     = 8080
+#   protocol = "HTTP"
+#   vpc_id   = module.vpc.vpc_id
 
-  health_check {
-    path = "/"
-  }
+#   health_check {
+#     path = "/"
+#   }
 
-  tags = {
-    Department = "DevSecOps Associate"
-    Creation   = "terraform"
-    Project    = "intern"
-  }
+#   tags = {
+#     Department = "DevSecOps Associate"
+#     Creation   = "terraform"
+#     Project    = "intern"
+#   }
 
-}
-resource "aws_lb_target_group_attachment" "NextGenDS-rac3-attach" {
-  target_group_arn = aws_lb_target_group.NextGenDS-rac3.arn
-  target_id        = aws_instance.jenkins.id
-  port             = 8080
-}
+# }
+# resource "aws_lb_target_group_attachment" "NextGenDS-rac3-attach" {
+#   target_group_arn = aws_lb_target_group.NextGenDS-rac3.arn
+#   target_id        = aws_instance.jenkins.id
+#   port             = 8080
+# }
 
-resource "aws_lb_listener" "NextGenDS-rac3-tg" {
-  load_balancer_arn = aws_lb.NextGenDS-rac3.arn
-  port              = "80"
-  protocol          = "HTTP"
+# resource "aws_lb_listener" "NextGenDS-rac3-tg" {
+#   load_balancer_arn = aws_lb.NextGenDS-rac3.arn
+#   port              = "80"
+#   protocol          = "HTTP"
 
-  default_action {
-    type = "redirect"
+#   default_action {
+#     type = "redirect"
 
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
+#     redirect {
+#       port        = "443"
+#       protocol    = "HTTPS"
+#       status_code = "HTTP_301"
+#     }
+#   }
+# }
 
-resource "aws_lb_listener" "NextGenDS-rac3-tg-443" {
-  load_balancer_arn = aws_lb.NextGenDS-rac3.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/8f526e3c-4f0d-479b-8491-9b0182949e64"
+# resource "aws_lb_listener" "NextGenDS-rac3-tg-443" {
+#   load_balancer_arn = aws_lb.NextGenDS-rac3.arn
+#   port              = "443"
+#   protocol          = "HTTPS"
+#   certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/8f526e3c-4f0d-479b-8491-9b0182949e64"
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.NextGenDS-rac3.arn
-  }
-}
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.NextGenDS-rac3.arn
+#   }
+# }

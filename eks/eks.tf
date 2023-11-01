@@ -1,7 +1,7 @@
 resource "aws_eks_cluster" "NextGenDS-rac3" {
   name     = "NextGenDS-rac3-cluster"
   role_arn = aws_iam_role.NextGenDS.arn
-  version = "1.27"
+  version = "1.28"
   vpc_config {
     //subnet_ids = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
     subnet_ids = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
