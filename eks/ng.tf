@@ -16,7 +16,7 @@ resource "aws_eks_node_group" "NextGenDS-rac3-node-group" {
 
   remote_access {
     ec2_ssh_key               = "bastion"
-    source_security_group_ids = ["sg-0f66820510033f188"]
+    source_security_group_ids = [aws_security_group.bastion-rac3-sg.id]
   }
 
   depends_on = [
