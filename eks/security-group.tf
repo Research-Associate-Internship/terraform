@@ -1,32 +1,32 @@
-resource "aws_security_group" "bastion-rac3-sg" {
-  name   = "eks-bastion-rac3-sg"
-  vpc_id = "vpc-0945dd8c0e44991b0"
+# resource "aws_security_group" "bastion-rac3-sg" {
+#   name   = "eks-bastion-rac3-sg"
+#   vpc_id = "vpc-0945dd8c0e44991b0"
 
-  ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
+#   ingress {
+#     from_port = 22
+#     to_port   = 22
+#     protocol  = "tcp"
 
-    cidr_blocks = [
-      "98.218.24.252/32", "209.183.243.114/32", "73.132.135.211/32"
-    ]
-  }
+#     cidr_blocks = [
+#       "98.218.24.252/32", "209.183.243.114/32", "73.132.135.211/32"
+#     ]
+#   }
 
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-  tags = {
-    Name       = "eks-bastion-rac3-sg"
-    Department = "DevSecOps Associate"
-    Creation   = "terraform"
-  }
+#   tags = {
+#     Name       = "eks-bastion-rac3-sg"
+#     Department = "DevSecOps Associate"
+#     Creation   = "terraform"
+#   }
 
-}
+# }
 
 # resource "aws_security_group" "kibana-sg" {
 #   name   = "kibana-alb-sg"
