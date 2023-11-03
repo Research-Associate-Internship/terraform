@@ -4,7 +4,7 @@ resource "aws_eks_cluster" "NextGenDS-rac3" {
   version = "1.28"
   vpc_config {
     //subnet_ids = [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
-    subnet_ids = ["subnet-0a752048fb3caf902","subnet-004729a17faf46257","subnet-087b37379578cd037","subnet-0aa9f30d1300a6a64"]
+    subnet_ids = ["subnet-087b37379578cd037","subnet-0aa9f30d1300a6a64"]
   }
 
   enabled_cluster_log_types = ["api", "audit"]
