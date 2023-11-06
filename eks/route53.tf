@@ -1,6 +1,6 @@
  resource "aws_route53_record" "NextGenDS-rac3" {
    zone_id = "Z03309881PN2JZ6GGLOJ8"
-   name    = "NextGenDS-rac3.axle-interns.com"
+   name    = "nextgends-rac3.axle-interns.com"
    type    = "A"
 
    alias {
