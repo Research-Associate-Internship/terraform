@@ -4,7 +4,7 @@
    type    = "A"
 
    alias {
-     name                   = "a974ca6fa09694380a82f1e11c1b3730-1473608677.us-east-1.elb.amazonaws.com"
+     name                   = "k8s-game2048-ingress2-46ee75eeb1-403890270.us-east-1.elb.amazonaws.com"
      zone_id                = "Z35SXDOTRQ7X7K"
      evaluate_target_health = true
    }
