@@ -1,4 +1,4 @@
- resource "aws_route53_record" "NextGenDS-rac3" {
+ resource "aws_route53_record" "Vote-NextGenDS-rac3" {
    zone_id = "Z03309881PN2JZ6GGLOJ8"
    name    = "vote-nextgends-rac3.axle-interns.com"
    type    = "A"
@@ -10,7 +10,7 @@
    }
 
  }
-resource "aws_route53_record" "NextGenDS-rac3" {
+resource "aws_route53_record" "Result-NextGenDS-rac3" {
    zone_id = "Z03309881PN2JZ6GGLOJ8"
    name    = "result-nextgends-rac3.axle-interns.com"
    type    = "A"
