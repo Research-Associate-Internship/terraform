@@ -45,9 +45,9 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   role       = aws_iam_role.NextGenDS.name
 }
 
-# resource "aws_cloudwatch_log_group" "NextGenDS" {
-#   # Reference: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
-#   name              = "/aws/eks/NextGenDS-cluster/cluster"
-#   retention_in_days = "7"
+resource "aws_cloudwatch_log_group" "NextGenDS-Rac3" {
+   # Reference: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+  name              = "/aws/eks/NextGenDS-RAC3-Cluster/cluster"
+  retention_in_days = "7"
 
-# }
+}
