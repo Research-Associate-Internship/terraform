@@ -4,7 +4,7 @@
    type    = "A"
 
    alias {
-     name                   = "a883535d12a3f4ef79961d0ad5969e6c-1948833605.us-east-1.elb.amazonaws.com"
+     name                   = "k8s-votingap-ingressa-c0ea729ab3-1109160181.us-east-1.elb.amazonaws.com"
      zone_id                = "Z35SXDOTRQ7X7K"
      evaluate_target_health = true
    }
@@ -16,7 +16,7 @@ resource "aws_route53_record" "Result-NextGenDS-rac3" {
    type    = "A"
 
    alias {
-     name                   = "a883535d12a3f4ef79961d0ad5969e6c-1948833605.us-east-1.elb.amazonaws.com"
+     name                   = "k8s-votingap-ingressa-13f8d7a366-569281114.us-east-1.elb.amazonaws.com"
      zone_id                = "Z35SXDOTRQ7X7K"
      evaluate_target_health = true
    }
