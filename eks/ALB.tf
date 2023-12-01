@@ -6,7 +6,7 @@ resource "aws_lb_listener" "default" {
 
   protocol = "HTTPS"
   port     = 443
-
+  certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/f0ac5327-5fc3-4cd9-b47c-05828e5dc265"
   default_action {
     type             = "fixed-response"
     fixed_response {
@@ -23,6 +23,8 @@ resource "aws_lb_listener_rule" "vote" {
   action {
     type = "forward"
     target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:targetgroup/k8s-votingap-vote-fc048001fc/56462b07197cfef8"
+
+     
   }
 
   condition {
