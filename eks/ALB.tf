@@ -16,7 +16,7 @@ resource "aws_lb_listener" "default" {
     }
   }
 }
-resource "aws_lb_listener_rule" "" {
+resource "aws_lb_listener_rule" "vote" {
   listener_arn = aws_lb_listener.default.arn
   priority     = 1
 
