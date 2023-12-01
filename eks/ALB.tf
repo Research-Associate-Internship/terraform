@@ -52,7 +52,7 @@ resource "aws_lb_listener" "default" {
     }
   }
 }
-resource "aws_lb_listener_rule" "vote" {
+resource "aws_lb_listener_rule" "vote-http" {
   listener_arn = aws_lb_listener.default.arn
   priority     = 1
 
