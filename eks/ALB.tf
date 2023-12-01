@@ -1,11 +1,6 @@
 provider "kubernetes" {
   config_context_cluster   = "NextGenDS-rac3"
 }
-
-provider "aws" {
-  region = "us-east-1"
-}
-
 resource "aws_lb_listener" "default" {
   load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:loadbalancer/app/k8s-votingap-ingressa-c0ea729ab3/d6ac63d967162fb2"
 
