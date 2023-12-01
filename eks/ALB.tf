@@ -38,7 +38,7 @@ resource "aws_lb_listener_rule" "vote" {
     }
   }
 }
-resource "aws_lb_listener" "default" {
+resource "aws_lb_listener" "default-http" {
   load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:loadbalancer/app/k8s-votingap-ingressa-c0ea729ab3/d6ac63d967162fb2"
 
   protocol = "HTTP"
@@ -53,7 +53,7 @@ resource "aws_lb_listener" "default" {
   }
 }
 resource "aws_lb_listener_rule" "vote-http" {
-  listener_arn = aws_lb_listener.default.arn
+  listener_arn = aws_lb_listener.default-http.arn
   priority     = 1
 
   action {
