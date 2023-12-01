@@ -100,7 +100,7 @@ resource "aws_lb_listener" "default-result" {
   }
 }
 resource "aws_lb_listener_rule" "https-result" {
-  listener_arn = aws_lb_listener.default.arn
+  listener_arn = aws_lb_listener.default-result.arn
   priority     = 1
 
   action {
