@@ -1,7 +1,7 @@
 resource "aws_security_group_rule" "https_ingress" {
   security_group_id = "sg-077456172e29d3d01"
 
-  type        = "HTTPS"
+  type        = "ingress"
   from_port   = 443
   to_port     = 443
   protocol    = "tcp"
