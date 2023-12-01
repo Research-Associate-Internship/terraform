@@ -1,5 +1,49 @@
-# resource "aws_lb" "kibana" {
-#   name               = "k8s-votingap-ingressk-e24fe8242b"
+provider "kubernetes" {
+  config_context_cluster   = "NextGenDS-rac3"
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_lb_listener" "default" {
+  load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:loadbalancer/app/k8s-votingap-ingressa-c0ea729ab3/d6ac63d967162fb2"
+
+  protocol = "HTTPS"
+  port     = 443
+
+  default_action {
+    type             = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "404"
+      message_body = "Response body"
+    }
+  }
+}
+resource "aws_lb_listener_rule" "" {
+  listener_arn = aws_lb_listener.default.arn
+  priority     = 1
+
+  action {
+    type = "forward"
+    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:targetgroup/k8s-votingap-vote-fc048001fc/56462b07197cfef8"
+  }
+
+  condition {
+    path_pattern {
+      values = ["/*"]
+    }
+  }
+  condition {
+    host_header {
+      values = ["vote-nextgends-rac3.axle-interns.com"]
+    }
+  }
+}
+
+# resource "aws_lb" "vote" {
+#   name               = "k8s-votingap-ingressa-c0ea729ab3"
 #   internal           = false
 #   load_balancer_type = "application"
 #   security_groups    = ["sg-0750dc02e225c822d"]
