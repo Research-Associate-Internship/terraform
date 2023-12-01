@@ -160,4 +160,80 @@ resource "aws_lb_listener_rule" "result-http" {
     }
   }
 }
+#--------------Kibana alb---------------------
+resource "aws_lb_listener" "default-kibana" {
+  load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:loadbalancer/app/k8s-votingap-ingressk-e24fe8242b/633fe3ffd2b728d2"
 
+  protocol = "HTTPS"
+  port     = 443
+  certificate_arn   = "arn:aws:acm:us-east-1:853931821519:certificate/9b5e3d4d-80ef-44af-996d-a3bf63d15ba6"
+  default_action {
+    type             = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "404"
+      message_body = "Response body"
+    }
+  }
+}
+resource "aws_lb_listener_rule" "https-kibana" {
+  listener_arn = aws_lb_listener.default-kibana.arn
+  priority     = 1
+
+  action {
+    type = "forward"
+    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:targetgroup/k8s-votingap-kibananp-b4d0b7f4ed/b0d17879f3a7fff3"
+     
+  }
+
+  condition {
+    path_pattern {
+      values = ["/*"]
+    }
+  }
+  condition {
+    host_header {
+      values = ["kibana-logs.axle-interns.com"]
+    }
+  }
+}
+resource "aws_lb_listener" "default-kibana-http" {
+  load_balancer_arn = "arn:aws:elasticloadbalancing:us-east-1:853931821519:loadbalancer/app/k8s-votingap-ingressk-e24fe8242b/633fe3ffd2b728d2"
+
+  protocol = "HTTP"
+  port     = 80
+  default_action {
+    type             = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "404"
+      message_body = "Response body"
+    }
+  }
+}
+resource "aws_lb_listener_rule" "kibana-http" {
+  listener_arn = aws_lb_listener.default-kibana-http.arn
+  priority     = 1
+
+  action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+     
+  }
+  
+
+  condition {
+    path_pattern {
+      values = ["/*"]
+    }
+  }
+  condition {
+    host_header {
+      values = ["kibana-logs.axle-interns.com"]
+    }
+  }
+}
